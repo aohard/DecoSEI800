@@ -68,7 +68,7 @@ function magnify(imgID, zoom) {
             document.getElementById("description2").style.display = "block";
         } else if (x > 500 && x < 640 && y > 100 && y < 450) {
             document.getElementById("description3").style.display = "block";
-        } else if (x > 200 && x < 500 && y > 450 && y < 600) {
+        } else if (x > 200 && x < 500 && y > 350 && y < 450) {
             document.getElementById("description4").style.display = "block";
         }
     }
