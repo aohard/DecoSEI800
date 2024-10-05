@@ -38,13 +38,13 @@ function magnify(imgID) {
 
         let description;
         // Determinar cuál descripción mostrar
-        if (xPercent > 0 && xPercent < 1 && yPercent > 0 && yPercent < 0.30) {
+        if (xPercent > 0.2 && xPercent < 0.8 && yPercent > 0 && yPercent < 0.30) {
             description = document.getElementById("description1");
         } else if (xPercent > 0 && xPercent < 0.2 && yPercent > 0.33 && yPercent < 0.7) {
             description = document.getElementById("description2");
         } else if (xPercent > 0.8 && xPercent < 1 && yPercent > 0.33 && yPercent < 0.7) {
             description = document.getElementById("description3");
-        } else if (xPercent > 0 && xPercent < 1 && yPercent > 0.8 && yPercent < 1) {
+        } else if (xPercent > 0.2 && xPercent < 0.8 && yPercent > 0.8 && yPercent < 0.95) {
             description = document.getElementById("description4");
         }
 
