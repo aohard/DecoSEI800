@@ -62,13 +62,13 @@ function magnify(imgID, zoom) {
         descriptions.forEach(desc => desc.style.display = 'none');
 
         // Mostrar la descripción correspondiente basada en la posición del cursor
-        if (x > 200 && x < 500 && y > 0 && y < 150) {
+        if (x > 0 && x < 240 && y > 0 && y < 60) {
             document.getElementById("description1").style.display = "block";
-        } else if (x > 0 && x < 150 && y > 100 && y < 450) {
+        } else if (x > 0 && x < 40 && y > 60 && y < 120) {
             document.getElementById("description2").style.display = "block";
-        } else if (x > 500 && x < 640 && y > 100 && y < 450) {
+        } else if (x > 200 && x < 240 && y > 60 && y < 120) {
             document.getElementById("description3").style.display = "block";
-        } else if (x > 200 && x < 500 && y > 350 && y < 450) {
+        } else if (x > 0 && x < 240 && y > 120 && y < 180) {
             document.getElementById("description4").style.display = "block";
         }
     }
