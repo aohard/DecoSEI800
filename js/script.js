@@ -8,11 +8,17 @@ function magnify(imgID, zoom) {
 
     img.parentElement.insertBefore(glass, img);
 
-    glass.style.backgroundImage = "url('" + img.src + "')";
-    glass.style.backgroundRepeat = "no-repeat";
-    glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
-    w = glass.offsetWidth / 2;
-    h = glass.offsetHeight / 2;
+    // Función para actualizar el tamaño del fondo de la lupa cuando cambie la imagen
+    function updateMagnifier() {
+        glass.style.backgroundImage = "url('" + img.src + "')";
+        glass.style.backgroundRepeat = "no-repeat";
+        glass.style.backgroundSize = (img.width * zoom) + "px " + (img.height * zoom) + "px";
+        w = glass.offsetWidth / 2;
+        h = glass.offsetHeight / 2;
+    }
+
+    updateMagnifier(); // Inicializa el tamaño de la lupa
+    window.addEventListener('resize', updateMagnifier); // Recalcular el tamaño cuando la ventana cambie
 
     // Eventos para mover la lupa
     glass.addEventListener("mousemove", moveMagnifier);
@@ -34,15 +40,15 @@ function magnify(imgID, zoom) {
         if (y > img.height - (h / zoom)) { y = img.height - (h / zoom); }
         if (y < h / zoom) { y = h / zoom; }
 
-        // Posición de la lupa
-        glass.style.left = (x - w) + "px";
-        glass.style.top = (y - h) + "px";
+        // Posicionar la lupa directamente sobre el mouse
+        glass.style.left = x + "px"; // La lupa sigue exactamente el cursor
+        glass.style.top = y + "px";  // La lupa sigue exactamente el cursor
 
         // Ajustar el zoom de la imagen en la lupa
         glass.style.backgroundPosition = "-" + ((x * zoom) - w) + "px -" + ((y * zoom) - h) + "px";
 
         // Mostrar la descripción correcta
-        showDescription(x, y);
+        showDescription(x / img.width, y / img.height); // Pasar las coordenadas como porcentaje
     }
 
     function getCursorPos(e) {
@@ -56,19 +62,20 @@ function magnify(imgID, zoom) {
         return { x: x, y: y };
     }
 
-    function showDescription(x, y) {
+    // Mostrar la descripción correcta basada en la posición porcentual
+    function showDescription(xPercent, yPercent) {
         // Ocultar todas las descripciones
         const descriptions = document.querySelectorAll('.description');
         descriptions.forEach(desc => desc.style.display = 'none');
 
-        // Mostrar la descripción correspondiente basada en la posición del cursor
-        if (x > 0 && x < 240 && y > 0 && y < 60) {
+        // Mostrar la descripción correspondiente usando porcentajes
+        if (xPercent > 0 && xPercent < 0.5 && yPercent > 0 && yPercent < 0.33) {
             document.getElementById("description1").style.display = "block";
-        } else if (x > 0 && x < 40 && y > 60 && y < 120) {
+        } else if (xPercent > 0 && xPercent < 0.2 && yPercent > 0.33 && yPercent < 0.66) {
             document.getElementById("description2").style.display = "block";
-        } else if (x > 200 && x < 240 && y > 60 && y < 120) {
+        } else if (xPercent > 0.83 && xPercent < 1 && yPercent > 0.33 && yPercent < 0.66) {
             document.getElementById("description3").style.display = "block";
-        } else if (x > 0 && x < 240 && y > 120 && y < 180) {
+        } else if (xPercent > 0 && xPercent < 1 && yPercent > 0.66 && yPercent < 1) {
             document.getElementById("description4").style.display = "block";
         }
     }

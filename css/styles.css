@@ -1,30 +1,43 @@
 /* Estilos básicos */
 body {
     font-family: Arial, sans-serif;
+    
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
-    justify-content: top;
-    align-items: top;
+    flex-direction: column;
+    align-items: center;
     background-color: #f4f4f4;
 }
 
 /* Contenedor principal que alinea la imagen y las descripciones */
 .container {
     display: flex;
-    align-items: flex-start; /* Alinea los elementos en la parte superior */
-    justify-content: space-between;
-    width: 100%; /* Usar todo el ancho disponible */
-    max-width: 1200px; /* Para limitar el ancho del contenedor */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 15px;
+
 }
 
-/* Contenedor de la imagen con lupa */
+/* Hacer que la imagen sea responsiva */
 .img-magnifier-container {
-    position: relative;
-    margin-right: 20px; /* Separación de la imagen respecto a las descripciones */
-    flex-shrink: 0; /* La imagen no se redimensionará */
+    float: left; /* Mantiene la imagen alineada a la izquierda */
+    margin-right: 20px; /* Añade un espacio a la derecha de la imagen si hay otros elementos */
+    max-width: 100%; /* Asegura que la imagen sea responsiva */
 }
+
+.img-magnifier-container img {
+    max-width: 100%; /* Hace que la imagen sea responsiva */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
+
+
 
 /* Estilo de la lupa */
 .img-magnifier-glass {
@@ -32,58 +45,69 @@ body {
     border: 3px solid #000;
     border-radius: 50%;
     cursor: none;
-    width: 150px;
-    height: 150px;
+    width: 100px; /* El tamaño de la lupa puede ajustarse aquí */
+    height: 100px; /* Hacer la lupa cuadrada */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: white;
     background-repeat: no-repeat;
-    background-size: 200% 200%;
+    background-size: 200% 200%; /* Asegura que el zoom se vea bien */
     z-index: 99;
-    pointer-events: none;
+    pointer-events: none; /* Evita que interfiera con la interacción del usuario */
 }
 
-/* Contenedor de descripciones alineadas a la derecha */
+/* Contenedor de las descripciones */
 .description-container {
-    flex-grow: 1; /* La sección de descripciones crecerá para ocupar el espacio disponible */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left: 20px;
-    max-width: 400px; /* Limitar el ancho de las descripciones */
+    position: fixed; /* Hace que la descripción esté siempre visible en la parte superior derecha */
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    right: 10px; /* Ajusta la distancia desde el borde derecho */
+    max-width: 300px; /* Controla el ancho máximo de la descripción */
+    z-index: 100; /* Asegura que la descripción esté sobre otros elementos */
 }
 
-/* Estilo de cada descripción */
 .description {
-    display: none; /* Oculto por defecto */
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
+    color: white; /* Texto en color blanco */
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
-    width: 100%; /* Las descripciones ocupan todo el ancho disponible */
-    text-align: left;
 }
 
-/* Clase activa que muestra la descripción */
-.description.active {
-    display: block;
-}
-
-/* Contenedor para las imágenes y títulos */
-.image-title-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-
-h3 {
-    font-size: 15px;
-    margin: 0; /* Quita el margen por defecto de los títulos */
-    color: white; /* Color del texto para que sea visible sobre el fondo oscuro */
-}
 h1 {
-    font-size: 15px;
-    margin: 0; /* Quita el margen por defecto de los títulos */
-    color: white; /* Color del texto para que sea visible sobre el fondo oscuro */
+    font-size: 12px; /* Puedes ajustar el tamaño a lo que prefieras */
+    margin: 0; /* Elimina el margen extra por defecto */
+    color: white; /* Si necesitas cambiar el color, aquí puedes modificarlo */
+}
+
+
+
+@media (min-width: 768px) {
+    /* Alinear horizontalmente cuando el ancho de la pantalla sea mayor a 768px */
+    .container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .img-magnifier-container {
+        flex-shrink: 0;
+        margin-right: 20px;
+    }
+
+    .description-container {
+        max-width: 200px;
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .img-magnifier-glass {
+        width: 70px; /* Reducir el tamaño de la lupa en pantallas pequeñas */
+        height: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .img-magnifier-glass {
+        width: 50px; /* Aún más pequeña en pantallas móviles */
+        height: 50px;
+    }
 }
