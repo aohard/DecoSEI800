@@ -38,7 +38,7 @@ function magnify(imgID) {
 
         let description;
         // Determinar cuál descripción mostrar
-        if (xPercent > 0.3 && xPercent < 0.8 && yPercent > 0 && yPercent < 0.30) {
+        if (xPercent > 0 && xPercent < 1 && yPercent > 0 && yPercent < 0.30) {
             description = document.getElementById("description1");
         } else if (xPercent > 0 && xPercent < 0.2 && yPercent > 0.33 && yPercent < 0.7) {
             description = document.getElementById("description2");
