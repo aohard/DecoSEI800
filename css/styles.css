@@ -3,11 +3,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    height: 100vh; /* 100% de la altura de la ventana */
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Centra los elementos también verticalmente */
+    justify-content: center;
     background-color: #f4f4f4;
 }
 
@@ -18,65 +18,71 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%; /* Asegura que el contenedor ocupe todo el alto disponible */
+    height: 100%; /* 100% de la altura disponible */
     padding: 20px;
     box-sizing: border-box;
     font-size: 15px;
 }
 
-/* Hacer que la imagen sea responsiva */
+/* Asegura que el contenedor de la imagen también sea responsivo en altura */
 .img-magnifier-container {
-    float: left; /* Mantiene la imagen alineada a la izquierda */
-    margin-right: 20px; /* Añade un espacio a la derecha de la imagen si hay otros elementos */
-    max-width: 100%;
-    max-height: 100%; /* Asegura que la imagen también se ajuste al alto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Toma el ancho disponible */
+    height: 100%; /* Toma la altura disponible */
+    max-width: 100vw; /* Asegura que no exceda el ancho de la ventana */
+    max-height: 100vh; /* Asegura que no exceda la altura de la ventana */
 }
 
 .img-magnifier-container img {
-    max-width: 100%;
-    max-height: 100%; /* Mantiene la imagen dentro del contenedor sin desbordar */
-    height: auto;
+    max-width: 100%; /* Asegura que la imagen se ajuste al contenedor */
+    max-height: 100%; /* Asegura que la imagen no exceda el alto */
+    width: auto; /* Mantiene la proporción del ancho */
+    height: auto; /* Mantiene la proporción del alto */
 }
 
+/* Estilo de la lupa */
 /* Estilo de la lupa */
 .img-magnifier-glass {
     position: absolute;
     border: 3px solid #000;
     border-radius: 50%;
     cursor: none;
-    width: 100px; /* El tamaño de la lupa puede ajustarse aquí */
-    height: 100px; /* Hacer la lupa cuadrada */
+    width: 100px;
+    height: 100px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     background-color: white;
     background-repeat: no-repeat;
-    background-size: 200% 200%; /* Asegura que el zoom se vea bien */
+    background-size: 200% 200%;
     z-index: 99;
-    pointer-events: none; /* Evita que interfiera con la interacción del usuario */
+    pointer-events: none; /* Evita que interfiera con la interacción */
 }
+
 
 /* Contenedor de las descripciones */
 .description-container {
-    position: fixed; /* Hace que la descripción esté siempre visible */
-    top: 10px; /* Ajusta la distancia desde la parte superior */
-    right: 10px; /* Ajusta la distancia desde el borde derecho */
-    max-width: 300px; /* Controla el ancho máximo de la descripción */
-    max-height: calc(100vh - 20px); /* Ajusta la altura para que no desborde */
-    overflow-y: auto; /* Añade scroll si la descripción es demasiado larga */
-    z-index: 100; /* Asegura que la descripción esté sobre otros elementos */
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    max-width: 300px;
+    max-height: calc(100vh - 20px);
+    overflow-y: auto;
+    z-index: 100;
 }
 
 .description {
-    background-color: rgba(0, 0, 0, 0.7); /* Fondo semitransparente */
-    color: white; /* Texto en color blanco */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 
 h1 {
-    font-size: 8px; /* Ajusta el tamaño a lo que prefieras */
-    margin: 0; /* Elimina el margen extra por defecto */
-    color: white; /* Si necesitas cambiar el color, aquí puedes modificarlo */
+    font-size: 8px;
+    margin: 0;
+    color: white;
 }
 
 @media (min-width: 768px) {
@@ -84,7 +90,7 @@ h1 {
     .container {
         flex-direction: row;
         justify-content: space-between;
-        height: 100vh; /* Mantiene el contenedor al 100% del alto */
+        height: 100vh;
     }
 
     .img-magnifier-container {
@@ -100,14 +106,14 @@ h1 {
 
 @media (max-width: 768px) {
     .img-magnifier-glass {
-        width: 70px; /* Reducir el tamaño de la lupa en pantallas pequeñas */
+        width: 70px;
         height: 70px;
     }
 }
 
 @media (max-width: 480px) {
     .img-magnifier-glass {
-        width: 50px; /* Aún más pequeña en pantallas móviles */
+        width: 50px;
         height: 50px;
     }
 }

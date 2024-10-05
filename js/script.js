@@ -30,25 +30,23 @@ function magnify(imgID, zoom) {
     function moveMagnifier(e) {
         let pos, x, y;
         e.preventDefault();
+
+        // Obtener la posición del puntero dentro de la imagen
         pos = getCursorPos(e);
-        x = pos.x;
-        y = pos.y;
-
-        // Restringir el área de la lupa dentro de la imagen
-        if (x > img.width - (w / zoom)) { x = img.width - (w / zoom); }
-        if (x < w / zoom) { x = w / zoom; }
-        if (y > img.height - (h / zoom)) { y = img.height - (h / zoom); }
-        if (y < h / zoom) { y = h / zoom; }
-
-        // Posicionar la lupa directamente sobre el mouse
-        glass.style.left = x + "px"; // La lupa sigue exactamente el cursor
-        glass.style.top = y + "px";  // La lupa sigue exactamente el cursor
 
         // Ajustar el zoom de la imagen en la lupa
-        glass.style.backgroundPosition = "-" + ((x * zoom) - w) + "px -" + ((y * zoom) - h) + "px";
+        glass.style.backgroundPosition = "-" + ((pos.x * zoom) - w) + "px -" + ((pos.y * zoom) - h) + "px";
+
+        // Obtener la posición del cursor en la ventana
+        x = e.clientX;
+        y = e.clientY;
+
+        // Posicionar la lupa siempre al lado del puntero, ajustando en función del tamaño del viewport
+        glass.style.left = (x + 15) + "px";  // Lupa ligeramente a la derecha del cursor
+        glass.style.top = (y - h) + "px";    // Lupa centrada verticalmente respecto al cursor
 
         // Mostrar la descripción correcta
-        showDescription(x / img.width, y / img.height); // Pasar las coordenadas como porcentaje
+        showDescription(pos.x / img.width, pos.y / img.height); // Pasar las coordenadas como porcentaje
     }
 
     function getCursorPos(e) {
@@ -57,8 +55,6 @@ function magnify(imgID, zoom) {
         a = img.getBoundingClientRect();
         x = e.pageX - a.left;
         y = e.pageY - a.top;
-        x = x - window.pageXOffset;
-        y = y - window.pageYOffset;
         return { x: x, y: y };
     }
 
