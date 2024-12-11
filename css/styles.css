@@ -98,3 +98,19 @@ h1 {
         width: 100%;
     }
 }
+
+.description-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    width: 300px;
+}
+
+.instruction-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: right;
+}
