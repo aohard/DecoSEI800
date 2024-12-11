@@ -47,12 +47,12 @@ body {
 .description {
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     display: none; /* Por defecto, las descripciones están ocultas */
     position: absolute; /* Se asegura que floten cerca del mouse */
     z-index: 1000; /* Asegura que estén por encima de otros elementos */
-    font-size: 10px;
+    font-size: 8px;
     max-width: 200px;
 }
 
